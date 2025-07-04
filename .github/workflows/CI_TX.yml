@@ -1,0 +1,23 @@
+name: Verilog CI for TX
+
+on:
+  push:
+    paths:
+      - 'TX.v'
+  pull_request:
+    paths:
+      - 'TX.v'
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install Icarus Verilog
+      run: sudo apt-get update && sudo apt-get install -y iverilog
+
+    - name: Run Simulation
+      run: vvp sim_TX
