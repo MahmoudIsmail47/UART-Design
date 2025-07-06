@@ -1,4 +1,4 @@
-module CLK_DIV (input clk, prescale, output reg clk_out);
+module OVS (input clk, prescale, output reg clk_out);
 
 integer i;
 reg flare;
