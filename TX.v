@@ -1,15 +1,18 @@
-module TX (input clk, rst, par_typ, par_en, data_valid,
+module TX (input clk, rst, par_typ, par_en, data_valid, prescale,
     input [7:0] p_data, 
     output reg tx_out, busy);
 
 integer i;
 reg [7:0] data_container;
 reg [2:0] cs, ns;
+wire clk_in;
 
 localparam IDLE = 3'b000, T_PARE = 3'b001, T_PARO = 3'b010, T_NPAR = 3'b011,
     T_PARE2 = 3'b100, T_PARO2 = 3'b101, T_NPAR2 = 3'b110;
 
-always @ (posedge clk) begin
+OVS ovs (.clk(clk), .prescale(prescale), .clk_out(clk_in));
+
+always @ (posedge clk_in) begin
     if (rst == 1'b0) begin
         cs <= IDLE;
     end
