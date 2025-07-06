@@ -42,41 +42,40 @@ always @ (*) begin
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
-                ns = IDLE;                
+                ns = IDLE;
             end
             else if (i == 0) begin
-                i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARE2;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARE2;
             end
             else if (i == 9) begin
-                i = i + 1;
                 p_data = p_data;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
-                ns = R_PARE2;
                 if (~(^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                i = i + 1;
+                ns = R_PARE2;
             end
             else begin
                 p_data = p_data;
                 data_valid = 1'b1;
-                ns = IDLE;
                 par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
@@ -84,42 +83,49 @@ always @ (*) begin
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
         R_PARE2: begin
-            if (i == 0) begin
-                i = i + 1;
+            if (start == 1'b0) begin
                 p_data = 8'b0;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                ns = IDLE;
+            end
+            else if (i == 0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARE;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARE;
             end
             else if (i == 9) begin
-                i = i + 1;
                 p_data = p_data;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
-                ns = R_PARE;
                 if (~(^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                i = i + 1;
+                ns = R_PARE;
             end
             else begin
                 p_data = p_data;
                 data_valid = 1'b1;
-                ns = IDLE;
                 par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
@@ -127,6 +133,7 @@ always @ (*) begin
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
         R_PARO: begin
@@ -135,41 +142,40 @@ always @ (*) begin
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
-                ns = IDLE;                
+                ns = IDLE;
             end
             else if (i == 0) begin
-                i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARO2;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARO2;
             end
             else if (i == 9) begin
-                i = i + 1;
                 p_data = p_data;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
-                ns = R_PARO2;
                 if ((^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                i = i + 1;
+                ns = R_PARO2;
             end
             else begin
                 p_data = p_data;
                 data_valid = 1'b1;
-                ns = IDLE;
                 par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
@@ -177,49 +183,49 @@ always @ (*) begin
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
-        R_PARO: begin
+        R_PARO2: begin
             if (start == 1'b0) begin
                 p_data = 8'b0;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
-                ns = IDLE;                
+                ns = IDLE;
             end
             else if (i == 0) begin
-                i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARO;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_PARO;
             end
             else if (i == 9) begin
-                i = i + 1;
                 p_data = p_data;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
-                ns = R_PARO;
                 if ((^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                i = i + 1;
+                ns = R_PARO;
             end
             else begin
                 p_data = p_data;
                 data_valid = 1'b1;
-                ns = IDLE;
                 par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
@@ -227,76 +233,75 @@ always @ (*) begin
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
         R_NPAR: begin
             if (start == 1'b0) begin
                 p_data = 8'b0;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
-                ns = IDLE;                
+                ns = IDLE;
             end
             else if (i == 0) begin
-                i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
+                par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_NPAR2;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_NPAR2;
             end
             else begin
                 p_data = p_data;
-                par_error = 1'b0;
                 data_valid = 1'b1;
-                ns = IDLE;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
                 end
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
         R_NPAR2: begin
             if (start == 1'b0) begin
                 p_data = 8'b0;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
-                ns = IDLE;                
+                ns = IDLE;
             end
             else if (i == 0) begin
-                i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
+                par_error = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_NPAR;
             end
-            else if (i >= 1 && i <= 8) begin
-                i = i + 1;
+            else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
                 stop_error = 1'b0;
+                i = i + 1;
                 ns = R_NPAR;
             end
             else begin
                 p_data = p_data;
-                par_error = 1'b0;
                 data_valid = 1'b1;
-                ns = IDLE;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
                 end
                 else begin
                     stop_error = 1'b1;
                 end
+                ns = IDLE;
             end
         end
     endcase
