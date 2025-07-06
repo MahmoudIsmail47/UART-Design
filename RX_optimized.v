@@ -13,7 +13,7 @@ always @ (posedge clk) begin
     else cs <= ns;
 
     if (flare) i <= i + 1;
-    else i = 0;
+    else i <= 0;
 end
 
 always @ (*) begin
