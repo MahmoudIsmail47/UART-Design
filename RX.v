@@ -212,7 +212,6 @@ always @ (*) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
                 ns = R_NPAR2;
             end
@@ -220,7 +219,6 @@ always @ (*) begin
                 i = i + 1;
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
                 ns = R_NPAR2;
             end
@@ -229,7 +227,6 @@ always @ (*) begin
                 par_error = 1'b0;
                 data_valid = 1'b1;
                 ns = IDLE;
-                par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
                 end
@@ -243,7 +240,6 @@ always @ (*) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
                 ns = R_NPAR;
             end
@@ -251,7 +247,6 @@ always @ (*) begin
                 i = i + 1;
                 p_data[i - 1] = rx_in;
                 data_valid = 1'b0;
-                par_error = 1'b0;
                 stop_error = 1'b0;
                 ns = R_NPAR;
             end
@@ -260,7 +255,6 @@ always @ (*) begin
                 par_error = 1'b0;
                 data_valid = 1'b1;
                 ns = IDLE;
-                par_error = par_error;
                 if (rx_in == 1'b1) begin
                     stop_error = 1'b0;
                 end
