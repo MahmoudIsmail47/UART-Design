@@ -3,7 +3,6 @@ module CLK_DIV (input clk, prescale, output reg clk_out);
 integer i;
 reg flare;
 
-
 always @ (*) begin
     if (prescale) begin
         flare = 1;
