@@ -37,7 +37,14 @@ always @ (*) begin
             end
         end
         R_PARE: begin
-            if (i == 0) begin
+            if (start == 1'b0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                ns = IDLE;                
+            end
+            else if (i == 0) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
@@ -123,7 +130,14 @@ always @ (*) begin
             end
         end
         R_PARO: begin
-            if (i == 0) begin
+            if (start == 1'b0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                ns = IDLE;                
+            end
+            else if (i == 0) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
@@ -166,7 +180,14 @@ always @ (*) begin
             end
         end
         R_PARO: begin
-            if (i == 0) begin
+            if (start == 1'b0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                ns = IDLE;                
+            end
+            else if (i == 0) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
@@ -209,7 +230,14 @@ always @ (*) begin
             end
         end
         R_NPAR: begin
-            if (i == 0) begin
+            if (start == 1'b0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                ns = IDLE;                
+            end
+            else if (i == 0) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
@@ -237,7 +265,14 @@ always @ (*) begin
             end
         end
         R_NPAR2: begin
-            if (i == 0) begin
+            if (start == 1'b0) begin
+                p_data = 8'b0;
+                data_valid = 1'b0;
+                par_error = 1'b0;
+                stop_error = 1'b0;
+                ns = IDLE;                
+            end
+            else if (i == 0) begin
                 i = i + 1;
                 p_data = 8'b0;
                 data_valid = 1'b0;
