@@ -27,9 +27,10 @@ always @ (*) begin
             i = 0;
             if (start) begin
                 case ({par_en , par_typ})
-                2'b10: ns = R_PARE;
-                2'b11: ns = R_PARO;
-                default: ns = R_NPAR;
+                    2'b10: ns = R_PARE;
+                    2'b11: ns = R_PARO;
+                    default: ns = R_NPAR;
+                endcase
             end
             else begin
                 ns = IDLE;
