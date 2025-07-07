@@ -50,7 +50,7 @@ always @ (*) begin
                 ns = T_PARE;
             end
             else if (i == 9) begin
-                tx_out = ~(^data_container);
+                tx_out = ^data_container;
                 ns = T_PARE;
             end
             else begin
@@ -70,7 +70,7 @@ always @ (*) begin
                 ns = T_PARO;
             end
             else if (i == 9) begin
-                tx_out = ^data_container;
+                tx_out = ~(^data_container);
                 ns = T_PARO;
             end
             else begin

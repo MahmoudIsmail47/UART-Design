@@ -36,7 +36,6 @@ always @ (*) begin
             end            
         end
         R_PARE: begin
-            flare = 1;
             p_data = p_data;
             data_valid = data_valid;
             par_error = par_error;
@@ -45,19 +44,22 @@ always @ (*) begin
                 ns = IDLE;
             end
             else if (i == 0) begin
+                flare = 1;
                 ns = R_PARE;
             end
             else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
+                flare = 1;
                 ns = R_PARE;
             end
             else if (i == 9) begin
-                if (~(^p_data) == rx_in) begin
+                if ((^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                flare = 1;
                 ns = R_PARE;
             end
             else begin
@@ -72,7 +74,6 @@ always @ (*) begin
             end
         end
         R_PARO: begin
-            flare = 1;
             p_data = p_data;
             data_valid = data_valid;
             par_error = par_error;
@@ -81,19 +82,22 @@ always @ (*) begin
                 ns = IDLE;
             end
             else if (i == 0) begin
+                flare = 1;
                 ns = R_PARO;
             end
             else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
+                flare = 1;
                 ns = R_PARO;
             end
             else if (i == 9) begin
-                if ((^p_data) == rx_in) begin
+                if (~(^p_data) == rx_in) begin
                     par_error = 1'b0;
                 end
                 else begin
                     par_error = 1'b1;
                 end
+                flare = 1;
                 ns = R_PARO;
             end
             else begin
@@ -111,16 +115,18 @@ always @ (*) begin
             flare = 1;
             p_data = p_data;
             data_valid = data_valid;
-            par_error = par_error;
+            par_error = 1'b0;
             stop_error = stop_error;
             if (start == 1'b0) begin
                 ns = IDLE;
             end
             else if (i == 0) begin
+                flare = 1;
                 ns = R_PARO;
             end
             else if (i> 0 && i < 9) begin
                 p_data[i - 1] = rx_in;
+                flare = 1;
                 ns = R_PARO;
             end
             else begin
