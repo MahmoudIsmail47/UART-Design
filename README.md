@@ -36,8 +36,6 @@ Simulation is performed using **ModelSim**, and synthesis/implementation is done
 
 ---
 
-## 🧩 Project Structure
-
 
 
 
